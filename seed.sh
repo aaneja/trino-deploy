@@ -33,7 +33,7 @@ if [ -f "/home/ec2-user/isCoordinator" ]; then
 else 
     ./configure.sh --isCoordinator 'false' --trinoInstallDir "$trinoInstallDir" 
 fi
-./launcher.sh  --trinoInstallDir "$trinoInstallDir"  --operation 'run'
+./launcher.sh  --trinoInstallDir "$trinoInstallDir"  --operation 'start'
 
 
 
