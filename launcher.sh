@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-installDir=${installDir:-"/home/ec2-user/trino"}
+trinoInstallDir=${trinoInstallDir:-"/home/ec2-user/trino"}
 operation=${operation:-"status"}
 
 
@@ -17,7 +17,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-cd "$installDir/bin"
+cd "$trinoInstallDir/bin"
 
 echo "Execution 'launcher $operation'"
 
