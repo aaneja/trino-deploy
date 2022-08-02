@@ -4,7 +4,6 @@ set -exuo
 isCoordinator=${isCoordinator:-false}
 trinoInstallDir=${trinoInstallDir:-"/home/ec2-user/trino"}
 coordinatorIsWorker=${coordinatorIsWorker:-"false"}
-jvmXmx=${jvmXmx:-"16G"}
 
 #Read in cmd line params
 while [ $# -gt 0 ]; do
@@ -34,14 +33,12 @@ export NODE_ID
 export DATA_DIR="$trinoInstallDir/data"
 export IS_COORDINATOR="$isCoordinator"
 export COORDINATOR_IS_WORKER="$coordinatorIsWorker"
-export JVM_XMX="$jvmXmx"
 #Create dirs needed
 mkdir -p "$DATA_DIR"
 
 #Substitute vars
 envsubst < "$ETC_DIR"/node.properties > "$OUT_DIR"/etc/node.properties
 envsubst < "$ETC_DIR"/config.properties > "$OUT_DIR"/etc/config.properties
-envsubst < "$ETC_DIR"/jvm.config > "$OUT_DIR"/etc/jvm.config
 
 #Copy the out dir to install location
 cp -Rf "$OUT_DIR/." "$trinoInstallDir/"
