@@ -4,42 +4,37 @@
 
 set -e
 
-installDir=${installDir:-"/tmp/trino-deploy"}
+tempDir="/tmp/trino-deploy"
 
 # Install Java 17
 echo "Installing Azul JDK"
 wget -q https://cdn.azul.com/zulu/bin/zulu17.36.13-ca-jdk17.0.4-linux.x86_64.rpm -O /tmp/zulu17.rpm
 sudo yum install -y /tmp/zulu17.rpm
 
-#Read in cmd line params
-while [ $# -gt 0 ]; do
 
-   if [[ $1 == *"--"* ]]; then
-        param="${1/--/}"
-        declare "$param"="$2"
-        # echo $1 $2 // Optional to see the parameter:value result
-   fi
-
-  shift
-done
-
-rm -f "$installDir"
-mkdir -p "$installDir"
+#Fetch the 'main' version of deployer from Github
+rm -rf "$tempDir" #Delete if still exists
+mkdir -p "$tempDir"
 
 wget https://github.com/aaneja/trino-deploy/tarball/main -O "/tmp/deployer.tar.gz"
-tar --extract --strip-components=1 -f "/tmp/deployer.tar.gz"  -C "$installDir"
+tar --extract --strip-components=1 -f "/tmp/deployer.tar.gz"  -C "$tempDir"
 
-cd "$installDir"
+cd "$tempDir"
 
+#Get Trino tarball
 trinoInstallDir='/home/ec2-user/trino'
+./fetch.sh --installDir "$trinoInstallDir" --downloadUri 'https://repo1.maven.org/maven2/io/trino/trino-server/391/trino-server-391.tar.gz'
 
-./fetch.sh
+# Configure templates
 if [ -f "/home/ec2-user/isCoordinator" ]; then
     ./configure.sh --isCoordinator 'true' --trinoInstallDir "$trinoInstallDir" 
 else 
     ./configure.sh --isCoordinator 'false' --trinoInstallDir "$trinoInstallDir" 
 fi
+
+#Start Trino
 ./launcher.sh  --trinoInstallDir "$trinoInstallDir"  --operation 'start'
+
 
 
 

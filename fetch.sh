@@ -18,13 +18,16 @@ done
 
 mkdir -p "$installDir"
 
-echo "Fetching Trino from Maven"
-wget -q "$downloadUri" -O "/tmp/trino.tar.gz"
+echo "Fetching tarball"
+wget -q "$downloadUri" -O "/tmp/binary.tar.gz"
 
 echo "Extracting to $installDir"
 
-#Strip components to get rid of top level directory use by trino
-tar --extract --strip-components=1 -f "/tmp/trino.tar.gz"  -C "$installDir"
+#Strip components to get rid of top level directory (default in Trino/Presto)
+tar --extract --strip-components=1 -f "/tmp/binary.tar.gz"  -C "$installDir"
+
+#Cleanup
+rm  -f "/tmp/binary.tar.gz"
 
 echo "Done"
 
