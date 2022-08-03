@@ -29,7 +29,7 @@ Start Trino using it's launcher script
  aws ssm send-command \
 --document-name "AWS-RunShellScript" \
 --document-version "1" \
---targets '[{"Key":"tag:trino-id","Values":["WORKER","COORDINATOR"]}]' \
+--targets '[{"Key":"tag:Name","Values":["WORKER","COORDINATOR"]}]' \
 --parameters '{"workingDirectory":[""],"executionTimeout":["3600"],"commands":["curl -L https://raw.githubusercontent.com/aaneja/trino-deploy/main/seed.sh | bash"]}' \
 --timeout-seconds 600 \
 --max-concurrency "50" \
