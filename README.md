@@ -35,7 +35,7 @@ Start Trino using it's launcher script
 --document-name "AWS-RunShellScript" \
 --document-version "1" \
 --targets '[{"Key":"tag:Name","Values":["WORKER","COORDINATOR"]}]' \
---parameters '{"workingDirectory":[""],"executionTimeout":["3600"],"commands":["curl -L https://raw.githubusercontent.com/aaneja/trino-deploy/main/trino_ec2_seed.sh | runuser -u ec2-user bash"]}' \
+--parameters '{"workingDirectory":[""],"executionTimeout":["3600"],"commands":["curl -L https://raw.githubusercontent.com/aaneja/trino-deploy/main/trino_ec2_seed.sh |  bash"]}' \
 --timeout-seconds 600 \
 --max-concurrency "50" \
 --max-errors "0" \
