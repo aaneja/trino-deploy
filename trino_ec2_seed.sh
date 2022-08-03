@@ -34,7 +34,7 @@ else
 fi
 
 #Change ownership to ec2-user
-chmod -R ec2-user:ec2-user "$trinoInstallDir"
+chown -R ec2-user:ec2-user "$trinoInstallDir"
 
 #Start Trino
 ./launcher.sh  --trinoInstallDir "$trinoInstallDir"  --operation 'start'
