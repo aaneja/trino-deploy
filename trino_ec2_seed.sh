@@ -10,7 +10,7 @@ tempDir="/tmp/trino-deploy"
 # Install Java 17
 echo "Installing Azul JDK"
 wget -q https://cdn.azul.com/zulu/bin/zulu17.36.13-ca-jdk17.0.4-linux.x86_64.rpm -O /tmp/zulu17.rpm
-yum install -y /tmp/zulu17.rpm
+yum  -y reinstall /tmp/zulu17.rpm #Installs again if already installed
 
 
 #Fetch the 'main' version of deployer from Github
