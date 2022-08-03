@@ -24,6 +24,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+rm -f "$installDir"
 mkdir -p "$installDir"
 
 wget https://github.com/aaneja/trino-deploy/tarball/main -O "/tmp/deployer.tar.gz"
