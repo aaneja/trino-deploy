@@ -37,7 +37,7 @@ Start Trino using it's launcher script
 --region us-west-2
 ```
 
-1. [orgalorg](https://github.com/reconquest/orgalorg)
+1. [pssh](https://github.com/lilydjwg/pssh)
 1. [Parallel-SSH](https://github.com/ParallelSSH/parallel-ssh)
 
 
