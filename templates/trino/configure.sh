@@ -1,8 +1,9 @@
 #!/bin/bash
 set -exuo
 
+templatesDir=${templatesDir:-"."}
 isCoordinator=${isCoordinator:-false}
-trinoInstallDir=${trinoInstallDir:-"/home/ec2-user/trino"}
+installDir=${installDir:-"/home/ec2-user/software"}
 coordinatorIsWorker=${coordinatorIsWorker:-"false"}
 
 #Read in cmd line params
@@ -18,9 +19,9 @@ while [ $# -gt 0 ]; do
 done
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-TEMPLATES_DIR="$SCRIPT_DIR/templates"
+TEMPLATES_DIR="$templatesDir"
 
-#Create and do intial copy to OUT_DIR
+#Create and do initial copy to OUT_DIR
 OUT_DIR="$SCRIPT_DIR/out"
 mkdir -p "$OUT_DIR"
 cp -R "$TEMPLATES_DIR/." "$OUT_DIR"
@@ -30,9 +31,10 @@ ETC_DIR="$TEMPLATES_DIR/etc"
 #Note : NodeID for a worker is setup randomly. On cloud envs, using some sort of instanceId is recommended
 NODE_ID=$([ "$isCoordinator" == "true" ] && echo "coordinator" || echo "worker-$RANDOM")
 export NODE_ID 
-export DATA_DIR="$trinoInstallDir/data"
+export DATA_DIR="$installDir/data"
 export IS_COORDINATOR="$isCoordinator"
 export COORDINATOR_IS_WORKER="$coordinatorIsWorker"
+
 #Create dirs needed
 mkdir -p "$DATA_DIR"
 
@@ -41,4 +43,4 @@ envsubst < "$ETC_DIR"/node.properties > "$OUT_DIR"/etc/node.properties
 envsubst < "$ETC_DIR"/config.properties > "$OUT_DIR"/etc/config.properties
 
 #Copy the out dir to install location
-cp -Rf "$OUT_DIR/." "$trinoInstallDir/"
+cp -Rf "$OUT_DIR/." "$installDir/"

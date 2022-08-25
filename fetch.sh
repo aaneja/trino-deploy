@@ -3,6 +3,7 @@ set -e
 
 installDir=${installDir:-"/home/ec2-user/trino"}
 downloadUri=${downloadUri:-'https://repo1.maven.org/maven2/io/trino/trino-server/391/trino-server-391.tar.gz'}
+#Presto : https://repo1.maven.org/maven2/com/facebook/presto/presto-server/0.275/presto-server-0.275.tar.gz
 
 #Read in cmd line params
 while [ $# -gt 0 ]; do

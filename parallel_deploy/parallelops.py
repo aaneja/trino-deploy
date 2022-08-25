@@ -26,8 +26,8 @@ def copy_to_remote(client: ParallelSSHClient, src: str, dest: str):
 
 
 def run_remote_cmd(client: ParallelSSHClient, cmd: str):
-    # runs the cmd on the remote host, with a 60s timeout
-    output = client.run_command(cmd, read_timeout=60, use_pty=True)
+    # runs the cmd on the remote host, with a 5min timeout
+    output = client.run_command(cmd, read_timeout=300, use_pty=True)
     for host_out in output:
         try:
             for line in host_out.stdout:
