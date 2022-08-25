@@ -1,0 +1,13 @@
+{
+  "hosts_map": {
+    "coordinator": "127.0.0.1",
+    "worker0": "127.0.0.1",
+    "worker1": "127.0.0.1",
+    "worker2": "127.0.0.1",
+    "worker3": "127.0.0.1"
+  },
+  "common_props": {
+    "private_key": "<key>",
+    "user": "anant"
+  }
+}
