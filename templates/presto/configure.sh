@@ -35,6 +35,10 @@ export DATA_DIR="$installDir/data"
 export IS_COORDINATOR="$isCoordinator"
 export COORDINATOR_IS_WORKER="$coordinatorIsWorker"
 
+totalramkb=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
+jvmXmx=$(($totalramkb*1024*90/100)) #90% of total ram
+export JVM_XMX="$jvmXmx"
+
 #Special care needed for below coordinator only properties
 if [ "$isCoordinator" == "true" ]; then
     export DISCOVERY_SERVER_ENABLED="discovery-server.enabled=true"
@@ -49,6 +53,7 @@ mkdir -p "$DATA_DIR"
 #Substitute vars
 envsubst < "$ETC_DIR"/node.properties > "$OUT_DIR"/etc/node.properties
 envsubst < "$ETC_DIR"/config.properties > "$OUT_DIR"/etc/config.properties
+envsubst < "$ETC_DIR"/jvm.config > "$OUT_DIR"/etc/jvm.config
 
 #Copy the out dir to install location
 cp -Rf "$OUT_DIR/." "$installDir/"
