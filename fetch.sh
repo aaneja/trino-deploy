@@ -2,7 +2,7 @@
 set -e
 
 installDir=${installDir:-"/home/ec2-user/trino"}
-downloadUri=${downloadUri:-'https://repo1.maven.org/maven2/io/trino/trino-server/391/trino-server-391.tar.gz'}
+downloadUri=${downloadUri:-'https://repo1.maven.org/maven2/io/trino/trino-server/395/trino-server-395.tar.gz'}
 
 #Read in cmd line params
 while [ $# -gt 0 ]; do
