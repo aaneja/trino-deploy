@@ -24,7 +24,7 @@ cd "$tempDir"
 
 #Get Trino tarball
 trinoInstallDir='/home/ec2-user/trino'
-./fetch.sh --installDir "$trinoInstallDir" --downloadUri 'https://repo1.maven.org/maven2/io/trino/trino-server/395/trino-server-395.tar.gz'
+./fetch.sh --installDir "$trinoInstallDir" --downloadUri 'https://repo1.maven.org/maven2/io/trino/trino-server/398/trino-server-398.tar.gz'
 
 # Configure templates
 if [ -f "/home/ec2-user/isCoordinator" ]; then
